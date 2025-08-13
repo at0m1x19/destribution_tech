@@ -131,7 +131,7 @@ def test_gist_forks(gists_api, forked_gist):
     )
 
 
-@allure.title("GET unknown gist returns 404")
+@allure.title("Get unknown gist returns 404")
 def test_get_nonexistent_gist_returns_404(gists_api):
     non_existent = uuid.uuid4().hex
     with allure.step("Request non-existent gist and expect 404"):
