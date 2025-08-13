@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "destribution-tech"
+version = "0.0.0"
+description = "Tests and client for GitHub Gists"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "destribution_tech" }
+]
+dependencies = [
+  "requests==2.32.4",
+  "python-dotenv==1.1.1",
+  "urllib3==2.5.0"
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest==8.4.1",
+  "allure-pytest==2.15.0",
+  "faker==37.5.3"
+]
+
+[tool.setuptools]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+exclude = ["tests*"]
