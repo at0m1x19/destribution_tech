@@ -1,5 +1,7 @@
 from typing import Any, Optional
 
+import allure
+
 from src.http_client import HttpClient
 
 
@@ -50,8 +52,18 @@ class GistsAPI:
             expected_status=expected_status,
         )
 
-    def list_public_gists(self, since: Optional[str] = None, expected_status: int = 200):
-        params = {"since": since} if since else None
+    def list_public_gists(
+            self,
+            since: Optional[str] = None,
+            per_page: int | None = None,
+            expected_status: int = 200,
+    ):
+        params = {}
+        if since:
+            params["since"] = since
+        if per_page:
+            params["per_page"] = per_page
+
         return self.client.get(
             url="/gists/public",
             params=params,

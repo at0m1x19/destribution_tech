@@ -1,3 +1,4 @@
+import random
 import time
 import uuid
 
@@ -95,6 +96,18 @@ def test_list_public_gists(gists_api):
         resp = gists_api.list_public_gists()
         data = resp.json()
         assert isinstance(data, list), f"Expected list of gists, got {type(data).__name__}"
+        assert len(data) == 30, f"Expected 30 gists, got {len(data)}"
+
+
+@allure.title("List public gists returns particular number of gists")
+def test_list_public_gists_per_page(gists_api):
+    expected_gists_number = random.randint(1, 100)
+
+    with allure.step("List public gists"):
+        resp = gists_api.list_public_gists(per_page=expected_gists_number)
+        data = resp.json()
+        assert isinstance(data, list), f"Expected list of gists, got {type(data).__name__}"
+        assert len(data) == expected_gists_number, f"Expected {expected_gists_number} gists, got {len(data)}"
 
 
 @allure.title("Gist commits contain two versions after an update")
